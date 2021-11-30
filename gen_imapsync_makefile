@@ -56,7 +56,7 @@ class MakefileGenerator:
                                               " --automap " + \
                                               " --noreleasecheck " + \
                                               " --useheader 'Message-Id' " + \
-                                              " --addheader --delete2duplicates" + \
+                                              " --addheader " + \
                                               " --delete2duplicates" + \
                                               " echo [`date`] " + MakefileGenerator.escape_bash_string(record["remote_username"]) + " -> " + \
                                               MakefileGenerator.escape_bash_string(record["local_username"]) + \
