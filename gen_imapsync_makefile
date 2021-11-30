@@ -49,16 +49,15 @@ class MakefileGenerator:
                                               " --user1 " + MakefileGenerator.escape_bash_string(record["remote_username"]) + \
                                               " --port1 " + MakefileGenerator.escape_bash_string(record["remote_imap_port"]) + \
                                               " --password1 " + MakefileGenerator.escape_bash_string(record["remote_password"]) + \
-                                              " --authmech1 LOGIN" + \
                                               " --host2 " + MakefileGenerator.escape_bash_string(record["local_imap_host"]) + \
-                                              " --port2 143" + \
+                                              " --port2 " + MakefileGenerator.escape_bash_string(record["local_imap_port"]) + \
                                               " --user2 " + MakefileGenerator.escape_bash_string(record["local_username"]) + \
                                               " --password2 " + MakefileGenerator.escape_bash_string(record["local_password"]) + \
-                                              " --authmech2 LOGIN" + \
-                                              " --subscribe" + \
-                                              " --sep2 /" + \
-                                              " --prefix2 oldmails/" + \
-                                              " --sep1 / &&" + \
+                                              " --automap " + \
+                                              " --noreleasecheck " + \
+                                              " --useheader 'Message-Id' " + \
+                                              " --addheader --delete2duplicates" + \
+                                              " --delete2duplicates" + \
                                               " echo [`date`] " + MakefileGenerator.escape_bash_string(record["remote_username"]) + " -> " + \
                                               MakefileGenerator.escape_bash_string(record["local_username"]) + \
                                               " exited with code $$? >> " + \
@@ -78,7 +77,7 @@ def main():
     if len(sys.argv) < 2:
         print "Usage: gen_imapsync_makefile <data_file.csv>"
         print "CSV Format: <remote_username>,<local_username>,<remote_password>,<local_password>,<remote_imap_host>," \
-              "<remote_imap_port>,<local_imap_host>"
+              "<remote_imap_port>,<local_imap_host>,<local_imap_port>"
         exit()
 
     data_file = sys.argv[1]
