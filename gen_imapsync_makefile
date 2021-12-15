@@ -14,13 +14,14 @@ class MakefileGenerator:
             for data_line in data_file.readlines():
                 data_entities = data_line.split(",")
                 self.data_list.append({
-                    "remote_username": data_entities[0].rstrip(),
-                    "local_username": data_entities[1].rstrip(),
-                    "remote_password": data_entities[2].rstrip(),
-                    "local_password": data_entities[3].rstrip(),
-                    "remote_imap_host":  data_entities[4].rstrip(),
-                    "remote_imap_port": data_entities[5].rstrip(),
-                    "local_imap_host": data_entities[6].rstrip()
+                    "remote_imap_host": data_entities[0].rstrip(),
+                    "remote_imap_port": data_entities[1].rstrip(),
+                    "remote_username": data_entities[2].rstrip(),
+                    "remote_password": data_entities[3].rstrip(),
+                    "local_imap_host": data_entities[4].rstrip(),
+                    "local_imap_port": data_entities[5].rstrip(),
+                    "local_username": data_entities[6].rstrip(),
+                    "local_password": data_entities[7].rstrip()
                 })
 
         data_file.close()
@@ -46,8 +47,8 @@ class MakefileGenerator:
             makefile_targets["all"] += target_string + " "
             record = self.data_list[index]
             makefile_targets[target_string] = "imapsync --host1 " + MakefileGenerator.escape_bash_string(record["remote_imap_host"]) + \
-                                              " --user1 " + MakefileGenerator.escape_bash_string(record["remote_username"]) + \
                                               " --port1 " + MakefileGenerator.escape_bash_string(record["remote_imap_port"]) + \
+                                              " --user1 " + MakefileGenerator.escape_bash_string(record["remote_username"]) + \
                                               " --password1 " + MakefileGenerator.escape_bash_string(record["remote_password"]) + \
                                               " --host2 " + MakefileGenerator.escape_bash_string(record["local_imap_host"]) + \
                                               " --port2 " + MakefileGenerator.escape_bash_string(record["local_imap_port"]) + \
@@ -76,8 +77,8 @@ class MakefileGenerator:
 def main():
     if len(sys.argv) < 2:
         print "Usage: gen_imapsync_makefile <data_file.csv>"
-        print "CSV Format: <remote_username>,<local_username>,<remote_password>,<local_password>,<remote_imap_host>," \
-              "<remote_imap_port>,<local_imap_host>,<local_imap_port>"
+        print "CSV Format: <remote_imap_host>,<remote_imap_port>,<remote_username>,<remote_password>,<local_imap_host>," \
+              "<local_imap_port>,<local_username>,<local_password>"
         exit()
 
     data_file = sys.argv[1]
