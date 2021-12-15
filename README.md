@@ -11,7 +11,7 @@ Run imapsync parallely for multiple mailboxes
 
 * Add a CSV file containing data in following format on each line:
 ```
-<remote_username>,<local_username>,<remote_password>,<local_password>,<remote_imap_host>,<remote_imap_port>,<local_imap_host>
+<remote_imap_host>,<remote_imap_port>,<remote_username>,<remote_password>,<local_imap_host>,<local_imap_port>,<local_username>,<local_password>
 ```
 
 * From command line run:
